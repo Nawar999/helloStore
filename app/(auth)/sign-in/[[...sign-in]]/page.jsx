@@ -3,8 +3,10 @@ import React from "react";
 
 const Sign_in = () => {
   return (
-    <div>
-      <SignIn />
+    <div className="flex h-screen bg-primary justify-center   ">
+      <div className="m-auto">
+        <SignIn />
+      </div>
     </div>
   );
 };

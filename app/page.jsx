@@ -1,14 +1,21 @@
-import { Button } from "@/components/ui/button";
 import React from "react";
-import { auth } from "@clerk/nextjs/server";
-const HomePage = async () => {
-  const user = auth();
+import Header from "./(component)/Header";
+import ProductsView from "./(component)/ProductsView";
+import Hero from "./(component)/Hero";
+import MainNavBar from "./(component)/MainNavBar";
 
-  console.log(user);
+const HomePage = async () => {
   return (
-    <div>
-      <Button>Click</Button>
-    </div>
+    <>
+      <Header />
+      <div className="flex  justify-center flex-col bg-primary p-4">
+        <div className="">
+          <Hero />
+          <ProductsView />
+        </div>
+      </div>
+      <MainNavBar />
+    </>
   );
 };
 
