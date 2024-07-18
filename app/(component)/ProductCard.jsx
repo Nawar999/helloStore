@@ -59,6 +59,7 @@ const ProductCard = ({
 
         <form className="mt-4">
           <button
+            type="button"
             onClick={() => handleClick(product)}
             className="block w-full rounded bg-sky-300 p-4 text-sm font-medium transition hover:scale-105 z-10"
           >

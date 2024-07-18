@@ -1,6 +1,5 @@
 "use client";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import React, { useState } from "react";
 import Link from "next/link";
 import icone from "../../public/hamburger.png";
 import Image from "next/image";
