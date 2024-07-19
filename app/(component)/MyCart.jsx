@@ -1,18 +1,25 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useCart } from "../(stateStore)/useCart";
 import Button from "./Button";
 import Link from "next/link";
+import { delete_from_cart } from "../hocks/delete_from_cart";
+
 const MyCart = () => {
-  const disCartState = useCart((state) => state.dis);
+  // const disCartState = useCart((state) => state.dis);
 
   // get cart from local storge
-  const cart = JSON.parse(localStorage.getItem("shopingCart"));
+  // const cart = JSON.parse(localStorage.getItem("shopingCart"));
+  // const cart = [
+  //   { name: "qqq", ex_price: 20, current_price: 20, timeInMonth: 3, id: 90 },
+  // ];
   // state to hold the cart
-  const [cartState, setCartState] = useState(cart);
-
+  const [cartState, setCartState] = useState([]);
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("shopingCart"));
+    setCartState(cart);
+  }, [setCartState]);
   // if empty cart return early
-  if (cart === null || cart.length === 0) {
+  if (cartState.length === 0) {
     return (
       <div className="bg-primary flex flex-col gap-56 h-screen p-6">
         <header className="text-center">
@@ -30,23 +37,23 @@ const MyCart = () => {
       </div>
     );
   }
-  //calculate total price
+  // calculate total price
   function getTotalPrice() {
-    // let total = 0;
-    // for (let i = 0; i < cart.length; i++) {
-    //   total = total + cart[i].current_price;
-    // }
-    return 1;
+    let total = 0;
+    for (let i = 0; i < cartState.length; i++) {
+      total = total + cartState[i].current_price;
+    }
+    return total;
   }
   const total = getTotalPrice();
 
   //delete from cart
   function deleteItem(i) {
-    cart.splice(i, 1);
-    localStorage.setItem("shopingCart", JSON.stringify(cart));
-    console.log(cart);
-    setCartState(cart);
-    disCartState();
+    const newCart = [...cartState];
+    newCart.splice(i, 1);
+    localStorage.setItem("shopingCart", JSON.stringify(newCart));
+
+    setCartState(newCart);
   }
   return (
     <section>
@@ -60,7 +67,7 @@ const MyCart = () => {
 
           <div className="mt-8">
             <ul className="space-y-4">
-              {cart.map((item, index) => {
+              {cartState.map((item, index) => {
                 return (
                   <li key={index} className="flex items-center gap-4 ">
                     <img
@@ -69,19 +76,19 @@ const MyCart = () => {
                       className="size-16 rounded object-cover"
                     />
 
-                    <div>
-                      <h3 className="text-sm text-gray-900">{item?.name}</h3>
+                    <div className="flex items-center flex-col justify-center">
+                      <h3 className="text-sm text-gray-900 ">{item?.name}</h3>
 
                       <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
                         <div>
-                          <dt className="inline">{item?.timeInMonth}</dt>
-                          {/* <dd className="inline">XXS</dd> */}
+                          <dd className="inline"> شهر</dd>
+                          <dt className="inline">{item?.timeInMonth} </dt>
                         </div>
 
-                        <div>
+                        {/* <div>
                           <dt className="inline">Color:</dt>
                           <dd className="inline">White</dd>
-                        </div>
+                        </div> */}
                       </dl>
                     </div>
 

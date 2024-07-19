@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useCart } from "../(stateStore)/useCart";
-import Link from "next/link";
+import React from "react";
+
 import MyCart from "../(component)/MyCart";
 
 const CartPage = () => {
