@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import Link from "next/link";
-import { delete_from_cart } from "../hocks/delete_from_cart";
 
 const MyCart = () => {
   // const disCartState = useCart((state) => state.dis);
